@@ -10,10 +10,4 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
-    build: {
-        manifest: true,
-        rollupOptions: {
-            input: 'resources/js/app.js',
-        },
-    },
 });
