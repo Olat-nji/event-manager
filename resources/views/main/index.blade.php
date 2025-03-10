@@ -1,6 +1,6 @@
 @extends('main.layouts.app')
 @section('body')
-<div class="flex container flex-col w-screen h-screen justify-center items-center text-center gap-4 px-3">
+<div class="flex container flex-col w-full mx-auto h-screen justify-center items-center text-center gap-4 px-3">
 <h1 class=" text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
  Join Exciting Events & Connect with Your Community!</h1>
 <p class="text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Discover and participate in engaging events tailored just for you!</p>
