@@ -24,7 +24,11 @@ class AddAsAdmin extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
+            if($model->id == request()->user()->id){
+                return Action::danger('You cannot perform this action on yourself');        
+            }
             $model->assignRole('admin');
+            $model->removeRole('user');
         }
 
         return Action::message('Selected user(s) have been added as admin.');
@@ -39,4 +43,6 @@ class AddAsAdmin extends Action
     {
         return [];
     }
+
+    
 }

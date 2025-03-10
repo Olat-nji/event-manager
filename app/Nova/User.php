@@ -67,6 +67,10 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules($this->passwordRules())
                 ->updateRules($this->optionalPasswordRules()),
+
+            Text::make('Role', function () {
+                return ucwords($this->getRoleNames()->implode(','));
+            })
         ];
     }
 
@@ -111,13 +115,13 @@ class User extends Resource
         return [
             (new AddAsAdmin)
                 ->canSee(function ($request) {
-                    return $request->user()->hasRole('admin');
-                }),
+                    return $request->user()->hasRole('user');
+                })->showInline(),
 
             (new RemoveAsAdmin)
                 ->canSee(function ($request) {
-                    return !$request->user()->hasRole('admin');
-                }),
+                    return $request->user()->hasRole('admin');
+                })->showInline(),
         ];
     }
 

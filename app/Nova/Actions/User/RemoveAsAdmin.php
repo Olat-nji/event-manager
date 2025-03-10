@@ -23,8 +23,13 @@ class RemoveAsAdmin extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        
         foreach ($models as $model) {
+            if($model->id == request()->user()->id){
+                return Action::danger('You cannot perform this action on yourself');        
+            }
             $model->assignRole('user');
+            $model->removeRole('admin');
         }
 
         return Action::message('Selected user(s) have been removed as admin.');
@@ -39,4 +44,6 @@ class RemoveAsAdmin extends Action
     {
         return [];
     }
+
+    
 }
