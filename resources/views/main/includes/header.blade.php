@@ -1,6 +1,6 @@
 <nav class="bg-gray-800 fixed w-full" x-data="{isMenuOpen:false}">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-between w-full @if(!auth()->check())sm:flex-row flex-row-reverse @endif">
+        <div class="relative flex h-16 items-center justify-between w-full @if(!auth()->check()) sm:flex-row flex-row-reverse @endif">
 
             {{-- @auth --}}
             <div class="flex items-center sm:hidden">
