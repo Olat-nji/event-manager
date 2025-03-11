@@ -14,7 +14,7 @@
 
         <div class="mb-5">
             <label for="email" class="block mb-2 text-sm font-medium ">Email</label>
-            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@gmail.com" required />
+            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Email Address" required  value="{{ old('email') }}"/>
             @error('email')
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
             @enderror
@@ -41,7 +41,7 @@
 
         <div class="mt-5 flex justify-between sm:hidden">
             <div class="col text-start "><a class=" text-sm font-light" href="{{ route('password.request') }}">Forgot Password?</a></div>
-            <div class="col text-start "><a class=" text-sm font-light" href="{{ route('register') }}">Or Sign Up?</a></div>
+            <div class="col text-start "><a class=" text-sm font-light" href="{{ route('register') }}">Or <span class="underline">Sign Up</span>?</a></div>
         </div>
     </form>
 
