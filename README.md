@@ -88,11 +88,20 @@ For production:
 npm run build
 ```
 
-### 8. Create an admin user
+### 8. Create an Admin User  
+
+To create an admin user, you can run the following command:  
+
 ```sh
 php artisan nova:user
-```
+```  
 Follow the prompts to create a new Nova admin user.
+
+Alternatively, you can log in using the pre-seeded credentials:  
+
+- **Email:** `admin@evm.com`  
+- **Password:** `admin@evm.com`  
+
 
 ### 9. Set up mailing configuration 
 If using Mailpit for local testing, add this to your `.env` file:
