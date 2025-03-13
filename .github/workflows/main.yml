@@ -25,9 +25,9 @@ jobs:
           tools: composer:v2
 
       - name: 📦 Install Dependencies
-        run: 
+        run: |
           composer config http-basic.nova.laravel.com "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
-          composer install --no-interaction --optimize-autoloader
+          composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: 🛠️ Run Tests
         run: |
