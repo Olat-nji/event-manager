@@ -7,6 +7,7 @@ export function showAlert(data) {
         text: data.message,
         position: "bottom-end",
         showConfirmButton: false,
+        showCloseButton: true,
         timer: 3000,
     });
 }

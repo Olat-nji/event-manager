@@ -1,10 +1,10 @@
 <!-- Main modal -->
 <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class=" relative z-50 transition-all " x-show="$store.showEventModal" x-cloak>
-    <div id="modal-backdrop" class="fixed inset-0 bg-gray-900/75 z-40 transition-opacity" ></div>
+    <div id="modal-backdrop" class="fixed inset-0 bg-gray-900/75 z-40 transition-opacity"></div>
     <div class="fixed inset-0 z-50 w-screen overflow-y-auto ">
         <div class="flex min-h-full items-center justify-center p-4 text-left sm:items-center sm:p-0">
             <!-- Modal content -->
-            <div class="relative transform overflow-hidden rounded-lg text-left  transition-all sm:my-8 sm:w-full sm:max-w-lg" @click.outside="$store.showEventModal=false">
+            <div class="relative transform overflow-hidden rounded-lg text-left  transition-all sm:my-8 sm:w-full sm:max-w-lg" >
 
                 <div class="relative bg-white rounded-xl shadow-sm dark:bg-gray-700">
                     <!-- Modal header -->
