@@ -9,24 +9,7 @@ on:
 
 jobs:
   run-tests:
-    name: Run Tests ✅ 
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: ⚡ Set Up PHP 8.2
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.2
-          extensions: zip, bcmath
-          coverage: none
-          tools: composer:v2
-
-      jobs:
-  run-tests:
-    name: ✅ Run Tests for Event Manager
+    name: Run Tests ✅
     runs-on: ubuntu-latest
 
     steps:
@@ -93,9 +76,9 @@ jobs:
         run: find . -path ./vendor -prune -o -type f -name "*.php" -print | xargs -n1 php -l
 
   deploy:
-    name:  Deploy to Production 🚀
+    name: Deploy to Production 🚀
     runs-on: ubuntu-latest
-    needs: run-tests  # Only runs if tests pass
+    needs: run-tests # Only runs if tests pass
     if: success()
 
     steps:
