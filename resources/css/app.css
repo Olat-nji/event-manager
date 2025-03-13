@@ -23,6 +23,10 @@
 
     }
 
+    .fc-direction-ltr .fc-daygrid-more-link{
+        z-index:10;
+    }
+
     .fc-toolbar-title {
         font-size: 1.1em !important;
         font-weight: bold;
