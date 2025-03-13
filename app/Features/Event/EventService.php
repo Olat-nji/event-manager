@@ -58,6 +58,8 @@ class EventService
                     ->get();
             });
 
+            ///A few more measures could be taken to further optimize the below but due to time constraints I'd have to skip
+
             return $events->loadExists([
                 'participants as is_joined' => fn($q) => $q->where('user_id', auth()->id()),
                 'waitlist as is_waitlisted' => fn($q) => $q->where('user_id', auth()->id()),
