@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-  # Uncomment to allow manual triggering from the Actions tab
-  # workflow_dispatch:
 
 jobs:
   run-tests:
