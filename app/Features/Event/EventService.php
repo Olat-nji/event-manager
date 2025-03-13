@@ -49,7 +49,7 @@ class EventService
 
         if (config('app.cache_enabled', false)) {
 
-            return Cache::remember($cacheKey, now()->addMinutes(30), function () use ($start, $end) {
+            $events = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($start, $end) {
                 return Event::withCount('participants', 'waitlist')
                     ->withExists(['participants as is_joined' => fn($q) => $q->where('user_id', auth()->id())])
                     ->withExists(['waitlist as is_waitlisted' => fn($q) => $q->where('user_id', auth()->id())])
@@ -57,6 +57,11 @@ class EventService
                     ->whereBetween('event_date_time', [$start, $end])
                     ->get();
             });
+
+            return $events->loadExists([
+                'participants as is_joined' => fn($q) => $q->where('user_id', auth()->id()),
+                'waitlist as is_waitlisted' => fn($q) => $q->where('user_id', auth()->id()),
+            ]);
         }
 
 
@@ -90,7 +95,7 @@ class EventService
         ]);
 
         event(new ParticipantRegisteredEvent($user, $event));
-        
+
         self::invalidateCache();
 
         return ApiResponse::success($event, EventResponseEnum::SUCCESS_REGISTERED->value);
@@ -182,4 +187,6 @@ class EventService
         Cache::forget('events_cache_version');
         Cache::forever('events_cache_version', now()->timestamp);
     }
+
+  
 }
