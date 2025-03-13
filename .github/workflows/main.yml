@@ -9,7 +9,7 @@ on:
 
 jobs:
   run-tests:
-    name: ✅ Run Tests
+    name: Run Tests ✅ 
     runs-on: ubuntu-latest
 
     steps:
@@ -28,6 +28,17 @@ jobs:
         run: |
           composer config http-basic.nova.laravel.com "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
           composer install --no-interaction --prefer-dist --optimize-autoloader
+          
+      - name: 📦 Install Node.js & Dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          
+      - name: 📦 Install Node Modules
+        run: npm ci
+
+      - name: 🔨 Build Frontend Assets
+        run: npm run build
 
       - name: 🛠️ Run Tests
         run: |
@@ -38,7 +49,7 @@ jobs:
         run: find . -path ./vendor -prune -o -type f -name "*.php" -print | xargs -n1 php -l
 
   deploy:
-    name: 🚀 Deploy to Production
+    name:  Deploy to Production 🚀
     runs-on: ubuntu-latest
     needs: run-tests  # Only runs if tests pass
     if: success()
