@@ -2,15 +2,19 @@
 
 @section('body')
 <div class="w-full self-center flex flex-col mt-20 px-5 py-5">
-    
-    
-    <div class="px-1 md:px-5">
-      
 
-        <h4 class="font-bold leading-none tracking-tight text-xl md:text-3xl  mb-9">Hello {{auth()->user()->name}},</h4>
+
+    <div class="px-1 md:px-5  py-5 relative isolate overflow-hidden rounded-xl ">
+        <div class="absolute inset-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+            <div class="rbg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%"></div>
+        </div>
+
+
+        <h4 class="font-bold leading-none tracking-tight text-xl md:text-3xl   align-middle">Hello {{auth()->user()->name}},</h4>
+        
     </div>
 
-    <div class="px-3 sm:px-14">
+    <div class="px-3 sm:px-14 mt-10">
         <div class="flex justify-between items-center mb-10 flex-wrap gap-4 ">
             <h4 class="font-extrabold leading-none tracking-tight text-md md:text-2xl">All Events</h4>
 

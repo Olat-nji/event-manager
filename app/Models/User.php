@@ -55,4 +55,10 @@ class User extends Authenticatable
             ->withPivot('is_waitlisted') // Include this pivot column
             ->withTimestamps(); // Automatically manage timestamps
     }
+
+    public function getAvatarAttribute(): string
+    {
+        $name=urlencode($this->name);
+        return "https://ui-avatars.com/api/?name={$name}&background=d1d5dc";
+    }
 }
