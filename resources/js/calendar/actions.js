@@ -2,17 +2,23 @@ import { calendar } from "../all-events";
 import { showAlert, toggleLoading } from "./utils";
 
 export function fetchEvents(fetchInfo, successCallback, failureCallback) {
-    fetch(
-        `${baseUrl}/?start=${fetchInfo.startStr}&end=${fetchInfo.endStr}&calendar=1`,
-        {
-            headers: {
-                Accept: "application/json",
-                "X-CSRF-TOKEN": document
-                    .querySelector('meta[name="csrf-token"]')
-                    .getAttribute("content"),
-            },
-        }
-    )
+    const startDate = new Date(fetchInfo.startStr)
+        .toISOString()
+        .replace("T", " ")
+        .substring(0, 19);
+    const endDate = new Date(fetchInfo.endStr)
+        .toISOString()
+        .replace("T", " ")
+        .substring(0, 19);
+
+    fetch(`${baseUrl}/?start=${startDate}&end=${endDate}&calendar=1`, {
+        headers: {
+            Accept: "application/json",
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
+        },
+    })
         .then((response) => response.json())
         .then((events) => successCallback(events.data))
         .catch((error) => {

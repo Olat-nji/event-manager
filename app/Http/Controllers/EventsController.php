@@ -36,11 +36,11 @@ class EventsController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         if ($request->expectsJson()) {
             $request->validate([
-                'start' => ['required'],
-                'end' => ['required'],
+                'start' => 'required|date|date_format:Y-m-d H:i:s',
+                'end' => 'required|date|date_format:Y-m-d H:i:s|after_or_equal:start',
                 'calendar' => ['sometimes', 'boolean'],
             ]);
             $events = $this->eventService->getEvents($request->query('start'), $request->query('end'));
