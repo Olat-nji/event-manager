@@ -32,7 +32,7 @@
             </div>
         </div>
         <div>
-            <img src="{{Vite::asset('resources/images/hero.jpg')}}" class="rounded-xl">
+            <img src="{{Vite::asset('resources/images/heroimg.jpg')}}" class="rounded-xl">
         </div>
     </div>
 
