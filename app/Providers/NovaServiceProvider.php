@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-
+use App\Models\User as ModelsUser;
 use App\Nova\Dashboards\Main;
 use App\Nova\Event;
 use App\Nova\User;
@@ -69,7 +69,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     protected function gate(): void
     {
-        Gate::define('viewNova', function (User $user) {
+        Gate::define('viewNova', function (ModelsUser $user) {
             return $user->hasRole('admin');
         });
     }
