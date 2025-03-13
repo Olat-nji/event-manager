@@ -27,6 +27,10 @@
         z-index:10;
     }
 
+    .fc .fc-popover{
+        z-index: 30;
+    }
+
     .fc-toolbar-title {
         font-size: 1.1em !important;
         font-weight: bold;
