@@ -42,7 +42,7 @@ class Event extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id',  'name',
     ];
 
     /**
@@ -155,10 +155,6 @@ class Event extends Resource
         ];
     }
 
-    public static function afterCreate($request, $model)
-    {
-        EventService::invalidateCache();
-    }
 
     public static function afterUpdate($request, $model)
     {

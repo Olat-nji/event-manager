@@ -33,7 +33,7 @@ class UnpublishEvent extends Action
         ]);
         EventService::invalidateCache();
 
-        return Action::message('Selected event(s) have been published.');
+        return Action::message('Selected event(s) have been unpublished.');
     }
 
     /**
