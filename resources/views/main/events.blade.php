@@ -12,13 +12,13 @@
 
             <div>
                 <div class="inline-flex rounded-md shadow-xs  p-2">
-                    <a href="#" aria-current="page" @click="changeCalendarView('month')" :class="$store.groupBy=='month'?'bg-gray-400 dark:bg-gray-700 ':''" class="px-4 py-2 rounded-xl text-sm font-medium   focus:z-10 focus:ring-2 focus:ring-blue-700  dark:focus:ring-blue-500">
+                    <a href="#" aria-current="page" @click="changeCalendarView('month')" :class="$store.groupBy=='month'?'bg-gray-300 dark:bg-gray-700 ':''" class="px-4 py-2 rounded-xl text-sm font-medium   focus:z-10 focus:ring-2 focus:ring-blue-700  dark:focus:ring-blue-500">
                         Month
                     </a>
-                    <a href="#" aria-current="page" @click="changeCalendarView('week')" :class="$store.groupBy=='week'?'bg-gray-400 dark:bg-gray-700 ':''" class="px-4 py-2 rounded-xl text-sm font-medium   focus:z-10 focus:ring-2 focus:ring-blue-700  dark:focus:ring-blue-500">
+                    <a href="#" aria-current="page" @click="changeCalendarView('week')" :class="$store.groupBy=='week'?'bg-gray-300 dark:bg-gray-700 ':''" class="px-4 py-2 rounded-xl text-sm font-medium   focus:z-10 focus:ring-2 focus:ring-blue-700  dark:focus:ring-blue-500">
                         Week
                     </a>
-                    <a href="#" aria-current="page" @click="changeCalendarView('day')" :class="$store.groupBy=='day'?'bg-gray-400 dark:bg-gray-700 ':''" class="px-4 py-2 rounded-xl text-sm font-medium   focus:z-10 focus:ring-2 focus:ring-blue-700  dark:focus:ring-blue-500">
+                    <a href="#" aria-current="page" @click="changeCalendarView('day')" :class="$store.groupBy=='day'?'bg-gray-300 dark:bg-gray-700 ':''" class="px-4 py-2 rounded-xl text-sm font-medium   focus:z-10 focus:ring-2 focus:ring-blue-700  dark:focus:ring-blue-500">
                         Day
                     </a>
                 </div>
@@ -26,7 +26,7 @@
 
         </div>
         <div >
-            <div class="mb-4 p-3  rounded-md shadow ">
+            <div class="mb-4 p-3  rounded-md ">
 
                 <div class="flex flex-wrap gap-4">
                     <div class="flex items-center space-x-2">
