@@ -53,6 +53,7 @@
 
                 <!-- Profile dropdown -->
                 <div class="relative shrink-0" x-data="{isDropdownExpanded:false}" @click.outside="isDropdownExpanded=false">
+                
                     <div>
                         <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" id="user-menu-button" aria-expanded="false" aria-haspopup="true" x-on:click="isDropdownExpanded=!isDropdownExpanded">
                             <span class="sr-only">Open user menu</span>
@@ -60,7 +61,9 @@
                         </button>
                     </div>
 
-                    <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" :class="isDropdownExpanded?'block':'hidden'">
+                    <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" :class="isDropdownExpanded?'block':'hidden'"
+                    
+                    >
 
                         @if(auth()->user()->hasRole('admin'))
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700" aria-current="page">All Events</a>

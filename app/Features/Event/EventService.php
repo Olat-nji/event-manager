@@ -14,6 +14,7 @@ use App\Models\EventParticipant;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class EventService
@@ -39,27 +40,30 @@ class EventService
      */
     public function getEvents(string $start, string $end): Collection
     {
-        $cacheKey = "events_{$start}_{$end}";
+        $versionKey = "events_cache_version";
+        $cacheVersion = Cache::rememberForever($versionKey, function () {
+            return now()->timestamp;
+        });
+
+        $cacheKey = "events_{$start}_{$end}_v{$cacheVersion}";
 
         if (config('app.cache_enabled', false)) {
+
             return Cache::remember($cacheKey, now()->addMinutes(30), function () use ($start, $end) {
                 return Event::withCount('participants', 'waitlist')
-                    ->withExists(['participants as is_joined' => function ($query) {
-                        $query->where('user_id', auth()->id());
-                    }])->withExists(['waitlist as is_waitlisted' => function ($query) {
-                        $query->where('user_id', auth()->id());
-                    }])->where('status', EventStatus::LIVE)
+                    ->withExists(['participants as is_joined' => fn($q) => $q->where('user_id', auth()->id())])
+                    ->withExists(['waitlist as is_waitlisted' => fn($q) => $q->where('user_id', auth()->id())])
+                    ->where('status', EventStatus::LIVE)
                     ->whereBetween('event_date_time', [$start, $end])
                     ->get();
             });
         }
 
+
         return Event::withCount('participants', 'waitlist')
-            ->withExists(['participants as is_joined' => function ($query) {
-                $query->where('user_id', auth()->id());
-            }])->withExists(['waitlist as is_waitlisted' => function ($query) {
-                $query->where('user_id', auth()->id());
-            }])->where('status', EventStatus::LIVE)
+            ->withExists(['participants as is_joined' => fn($q) => $q->where('user_id', auth()->id())])
+            ->withExists(['waitlist as is_waitlisted' => fn($q) => $q->where('user_id', auth()->id())])
+            ->where('status', EventStatus::LIVE)
             ->whereBetween('event_date_time', [$start, $end])
             ->get();
     }
@@ -87,6 +91,8 @@ class EventService
 
         event(new ParticipantRegisteredEvent($user, $event));
         
+        self::invalidateCache();
+
         return ApiResponse::success($event, EventResponseEnum::SUCCESS_REGISTERED->value);
     }
 
@@ -110,7 +116,7 @@ class EventService
         ]);
 
         event(new ParticipantWaitlistedEvent($user, $event));
-        
+        self::invalidateCache();
         return ApiResponse::success($event, EventResponseEnum::SUCCESS_WAITLISTED->value);
     }
 
@@ -127,7 +133,7 @@ class EventService
             ->whereIn('user_id', $userIds)
             ->delete();
 
-        
+
 
         if ($deletedCount === 0) {
             return ApiResponse::error(EventResponseEnum::ERROR_NOT_REGISTERED->value, 404);
@@ -136,7 +142,7 @@ class EventService
         event(new ParticipantsUnregisteredEvent($userIds, $event));
 
         $this->promoteFromWaitlist($event);
-
+        self::invalidateCache();
         return ApiResponse::success($event, EventResponseEnum::SUCCESS_UNREGISTERED->value);
     }
 
@@ -169,6 +175,11 @@ class EventService
             ->update(['is_waitlisted' => false]);
 
         event(new ParticipantsPromotedFromWaitlistEvent($waitlistedUsers->pluck('user_id')->toArray(), $event));
+    }
 
+    public static function invalidateCache()
+    {
+        Cache::forget('events_cache_version');
+        Cache::forever('events_cache_version', now()->timestamp);
     }
 }

@@ -123,4 +123,22 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Enable Caching of Events
+    |--------------------------------------------------------------------------
+    |
+    | This setting determines whether event data should be cached to improve 
+    | performance and reduce database queries. When enabled, event queries 
+    | will be stored in the cache and retrieved efficiently.
+    |
+    | Set this value to 'true' to enable caching or 'false' to disable it.
+    | You can control this via the environment file (.env) by setting:
+    | 
+    | CACHE_ENABLED=true
+    |
+    */
+
+    'cache_enabled' => env('CACHE_ENABLED', true),
+
 ];

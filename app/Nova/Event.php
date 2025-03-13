@@ -3,10 +3,12 @@
 namespace App\Nova;
 
 use App\Enums\EventStatus;
+use App\Features\Event\EventService;
 use App\Nova\Actions\Event\PublishEvent;
 use App\Nova\Actions\Event\ShowEvent;
 use App\Nova\Actions\Event\UnpublishEvent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\ID;
@@ -56,7 +58,7 @@ class Event extends Resource
             Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
-                
+
             Textarea::make('Description')
                 ->rules('required')->hideFromIndex(),
 
@@ -151,5 +153,30 @@ class Event extends Resource
                     return $this->status === EventStatus::LIVE;
                 })->showInline(),
         ];
+    }
+
+    public static function afterCreate($request, $model)
+    {
+        EventService::invalidateCache();
+    }
+
+    public static function afterUpdate($request, $model)
+    {
+        EventService::invalidateCache();
+    }
+
+    public static function afterDelete($request, $model)
+    {
+        EventService::invalidateCache();
+    }
+
+    public static function afterForceDelete($request, $model)
+    {
+        EventService::invalidateCache();
+    }
+
+    public static function afterRestore($request, $model)
+    {
+        EventService::invalidateCache();
     }
 }

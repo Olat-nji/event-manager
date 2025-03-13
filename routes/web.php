@@ -18,7 +18,7 @@ use Laravel\Fortify\Fortify;
  */
 
 // Landing page route
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/', [IndexController::class, 'index'])->name('home');
 
 /**
  * --------------------------------------------------------------------------

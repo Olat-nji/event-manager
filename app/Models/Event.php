@@ -6,6 +6,7 @@ use App\Enums\EventStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class Event
@@ -91,8 +92,6 @@ class Event extends Model
     {
         return $this->waitlist()->count() >= $this->waitlist_capacity;
     }
-    
 
 
-    
 }
