@@ -1,66 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://laravel.com" target="_blank">
+    <picture>
+      <source srcset="https://raw.githubusercontent.com/olat-nji/event-manager/main/resources/images/logo-white.svg" media="(prefers-color-scheme: dark)">
+      <img src="https://raw.githubusercontent.com/olat-nji/event-manager/main/resources/images/logo-black.svg" width="200" alt="Event Manager Logo">
+    </picture>
+  </a>
 </p>
 
-## About Laravel
+# Event Manager
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This repository provides a comprehensive event management system built with Laravel.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ensure you have the following installed:
 
-## Learning Laravel
+- PHP 8.1+
+- Composer
+- Laravel 10+
+- MySQL or SQLite for testing
+- Node.js & NPM
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Installation
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 1. Clone the repository
+```sh
+git clone <repository-url>
+cd event-manager
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Configure Nova authentication
+Before running `composer install`, configure Composer to authenticate Nova using your Nova license key:
 
-## Laravel Sponsors
+```sh
+composer config http-basic.nova.laravel.com your-nova-account-email@your-domain.com your-license-key
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+For more details, visit [Nova Documentation](https://nova.laravel.com/docs/v4/installation).
 
-### Premium Partners
+### 3. Install PHP dependencies
+```sh
+composer install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 4. Set up environment variables
+```sh
+cp .env.example .env
+php artisan key:generate
+```
 
-## Contributing
+### 5. Configure your database
+Edit your `.env` file:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+For SQLite:
+```sh
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/database.sqlite
+```
 
-## Code of Conduct
+For MySQL:
+```sh
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 6. Run database migrations
+```sh
+php artisan migrate --seed
+```
 
-## Security Vulnerabilities
+### 7. Install frontend dependencies
+```sh
+npm install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+For local development:
+```sh
+npm run dev
+```
 
-## License
+For production:
+```sh
+npm run build
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 8. Create an admin user
+```sh
+php artisan nova:user
+```
+Follow the prompts to create a new Nova admin user.
+
+### 9. Set up mailing configuration (Optional)
+If using Mailpit for local testing, add this to your `.env` file:
+```sh
+MAIL_MAILER=smtp
+MAIL_HOST=localhost
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+### 10. Run the application
+```sh
+php artisan serve
+```
+Then visit: [http://127.0.0.1:8000](http://127.0.0.1:8000) and log in with the credentials created.
+- Users are redirected to the event calendar.
+- Admins are redirected to the admin dashboard at 'admin/'
+
+## Deployment
+
+For Nova authentication in production or CI/CD pipelines, set your Nova credentials using environment variables:
+
+```sh
+composer config http-basic.nova.laravel.com "${NOVA_USERNAME}" "${NOVA_LICENSE_KEY}"
+```
+
+Ensure `NOVA_LICENSE_KEY` is set in your production `.env` file.
+
+For more details, visit [Nova Documentation](https://nova.laravel.com/docs/v4/installation).
+
+## Running Tests
+
+To execute feature tests:
+```sh
+php artisan test
+```
+Or using PHPUnit:
+```sh
+vendor/bin/phpunit
+```
+

@@ -22,6 +22,7 @@ class Main extends Dashboard
         return [
             new RegisteredUsers(),
             new Events(),
+            
         ];
     }
 

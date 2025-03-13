@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\EventStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->string('location');
             $table->unsignedInteger('capacity')->default(0);
             $table->unsignedInteger('waitlist_capacity')->default(0);
-            $table->enum('status', ['live', 'draft'])->default('draft');
+            $table->string('status')->default(EventStatus::DRAFT);
             $table->softDeletes();
             $table->index(['event_date_time', 'status']);
             $table->timestamps();

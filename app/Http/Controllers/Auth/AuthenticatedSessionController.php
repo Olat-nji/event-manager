@@ -21,6 +21,6 @@ class AuthenticatedSessionController extends Controller
             return Redirect::intended('/admin');
         }
 
-        return Redirect::intended('/user/dashboard');
+        return Redirect::intended('/user/events');
     }
 }

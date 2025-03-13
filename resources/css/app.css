@@ -10,3 +10,109 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+:root {
+    --fc-border-color: var(--color-gray-700) !important;
+    --fc-button-active-bg-color: var(--color-gray-700);
+    --fc-button-bg-color: var(--color-gray-900);
+    --fc-button-active-border-color: var(--color-gray-700);
+    --fc-button-border-color: transparent;
+    --fc-page-bg-color:var(--color-gray-900);
+
+}
+
+.fc-toolbar-title {
+    font-size: 1.1em !important;
+    font-weight: bold;
+
+}
+
+table.fc-scrollgrid {
+    border-radius: var(--radius-xl);
+}
+
+.fc .fc-scrollgrid-section>th {
+    border-top-right-radius: var(--radius-xl);
+}
+
+.fc-col-header-cell {
+
+    height: calc(var(--spacing)* 12);
+    vertical-align: middle !important;
+}
+
+.fc-button-group {
+    background-color: var(--color-gray-900);
+    padding: .3em;
+}
+
+.fc-button-group,
+.fc-dayGridMonth-button {
+    border-radius: var(--radius-xl) !important;
+}
+
+.fc-direction-ltr .fc-button-group>.fc-button:not(:first-child) {
+    border-radius: var(--radius-xl) !important;
+    border-bottom-left-radius: var(--radius-xl) !important;
+    border-top-left-radius: var(--radius-xl) !important;
+}
+
+
+.fc-col-header {
+
+    border-top-left-radius: var(--radius-xl);
+    border-top-right-radius: var(--radius-xl);
+
+    background-color: var(--color-gray-900);
+}
+
+.fc .fc-daygrid-day-top{
+    flex-direction: row;
+}
+
+.fc-theme-standard td{
+    background-color: var(--color-gray-800);
+}
+
+.fc-theme-standard .fc-day-other{
+    background-color: var(--color-gray-700);
+}
+
+.fc-theme-standard .fc-popover-header{
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+}
+
+.fc-theme-standard .fc-popover-body{
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+}
+
+[x-cloak] { display: none !important; }
+
+.loader {
+    width: 10px;
+    
+    aspect-ratio: 1;
+    border-radius: 50%;
+    
+    animation: l5 1s infinite linear alternate;
+  }
+.fixed .loader{
+    width: 15px;
+}
+
+  @keyframes l5 {
+      0%  {box-shadow: 20px 0 #fff, -20px 0 #fff2;background: #fff }
+      33% {box-shadow: 20px 0 #fff, -20px 0 #fff2;background: #fff2}
+      66% {box-shadow: 20px 0 #fff2,-20px 0 #fff; background: #fff2}
+      100%{box-shadow: 20px 0 #fff2,-20px 0 #fff; background: #fff }
+  }
+
+  .truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px; /* Adjust as needed */
+    display: block; /* or inline-block */
+}

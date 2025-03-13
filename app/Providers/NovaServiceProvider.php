@@ -2,10 +2,15 @@
 
 namespace App\Providers;
 
-use App\Models\Event;
-use App\Models\User;
+
+use App\Nova\Dashboards\Main;
+use App\Nova\Event;
+use App\Nova\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Fortify\Features;
+use Laravel\Nova\Menu\MenuItem;
+use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
@@ -18,7 +23,17 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
-        //
+        Nova::mainMenu(function (Request $request) {
+            return [
+                
+                
+                MenuSection::dashboard(Main::class)->icon('chart-bar'),
+                MenuSection::resource(User::class)->icon('user'),
+                MenuSection::resource(Event::class)->icon('calendar'),
+                MenuItem::externalLink('Go to Site',url('/')),    
+
+            ];
+        });
     }
 
     /**
@@ -90,6 +105,4 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         //
     }
-
-   
 }

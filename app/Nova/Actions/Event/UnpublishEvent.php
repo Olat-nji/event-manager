@@ -4,8 +4,10 @@ namespace App\Nova\Actions\Event;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Actions\ActionResponse;
 use Laravel\Nova\Fields\ActionFields;
@@ -23,8 +25,10 @@ class UnpublishEvent extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        
+        
         $models->toQuery()->update([
-            'status'=>'draft'
+            'status' => 'draft'
         ]);
 
         return Action::message('Selected event(s) have been published.');
@@ -39,4 +43,6 @@ class UnpublishEvent extends Action
     {
         return [];
     }
+
+   
 }

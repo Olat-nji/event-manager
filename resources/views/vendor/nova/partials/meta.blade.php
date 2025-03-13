@@ -1,0 +1,1 @@
+<link rel="icon" type="image/svg+xml" href="{{ Vite::asset('resources/images/logo-white.svg') }}">

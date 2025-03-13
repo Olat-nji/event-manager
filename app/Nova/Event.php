@@ -2,7 +2,9 @@
 
 namespace App\Nova;
 
+use App\Enums\EventStatus;
 use App\Nova\Actions\Event\PublishEvent;
+use App\Nova\Actions\Event\ShowEvent;
 use App\Nova\Actions\Event\UnpublishEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -10,8 +12,10 @@ use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Event extends Resource
@@ -28,7 +32,7 @@ class Event extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -52,6 +56,9 @@ class Event extends Resource
             Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
+                
+            Textarea::make('Description')
+                ->rules('required')->hideFromIndex(),
 
             DateTime::make('Event Date & Time', 'event_date_time')
                 ->sortable()
@@ -60,7 +67,7 @@ class Event extends Resource
             Number::make('Duration')
                 ->sortable()
                 ->placeholder('Duration (in minutes)')
-                ->rules('required', 'min:1'),
+                ->rules('required', 'min:1')->hideFromIndex(),
 
             Text::make('Location')
                 ->sortable()
@@ -73,10 +80,22 @@ class Event extends Resource
             Number::make('Waitlist Capacity')
                 ->sortable()
                 ->rules('required', 'min:0')->hideFromIndex(),
-            Badge::make('Status')->map([
-                'draft' => 'danger',
-                'live' => 'success',
-            ]),
+
+            Text::make('Duration', function () {
+                return "{$this->duration} minutes";
+            }),
+            Badge::make('Status')->map(EventStatus::colors()),
+            Text::make('Participants', function () {
+                return "{$this->participants()->count()} / $this->capacity";
+            }),
+
+            Text::make('Waitlist', function () {
+                return "{$this->waitlist()->count()} / $this->waitlist_capacity";
+            }),
+
+            HasMany::make('EventParticipants', 'participants', EventParticipant::class),
+            HasMany::make('Waitlist', 'waitlist', EventParticipant::class),
+
         ];
     }
 
@@ -117,16 +136,20 @@ class Event extends Resource
      */
     public function actions(NovaRequest $request): array
     {
+
         return [
             (new PublishEvent)
                 ->canSee(function ($request) {
-                    return $this->status !== 'live';
-                }),
+                    return $this->status !== EventStatus::LIVE;
+                })->showInline(),
 
             (new UnpublishEvent)
                 ->canSee(function ($request) {
-                    return $this->status === 'live';
-                }),
+                    if (!$this->status) {
+                        return true;
+                    }
+                    return $this->status === EventStatus::LIVE;
+                })->showInline(),
         ];
     }
 }
