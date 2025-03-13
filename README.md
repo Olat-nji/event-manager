@@ -18,7 +18,7 @@ Ensure you have the following installed:
 - PHP 8.1+
 - Composer
 - Laravel 10+
-- MySQL or SQLite for testing
+- PGSQL, MySQL or SQLite for testing
 - Node.js & NPM
 
 ## Installation
@@ -94,7 +94,7 @@ php artisan nova:user
 ```
 Follow the prompts to create a new Nova admin user.
 
-### 9. Set up mailing configuration (Optional)
+### 9. Set up mailing configuration 
 If using Mailpit for local testing, add this to your `.env` file:
 ```sh
 MAIL_MAILER=smtp

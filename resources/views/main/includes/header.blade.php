@@ -21,10 +21,10 @@
             <div class="flex items-center justify-center sm:items-stretch sm:justify-between sm:w-full">
                 <div class="flex shrink-0 items-center">
                     <a href="{{url('/')}}">
-                        
+
                         <picture>
                             <source srcset="https://raw.githubusercontent.com/olat-nji/event-manager/main/resources/images/logo-white.svg" media="(prefers-color-scheme: dark)">
-                            <img  class="h-4 w-auto" src="https://raw.githubusercontent.com/olat-nji/event-manager/main/resources/images/logo-black.svg">
+                            <img class="h-4 w-auto" src="https://raw.githubusercontent.com/olat-nji/event-manager/main/resources/images/logo-black.svg">
                         </picture>
                     </a>
                 </div>
@@ -49,16 +49,10 @@
 
             <div class=" flex gap-2 ">
 
-                <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-                    <span class="absolute -inset-1.5"></span>
-                    <span class="sr-only">View notifications</span>
-                    <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-                    </svg>
-                </button>
+
 
                 <!-- Profile dropdown -->
-                <div class="relative shrink-0" x-data="{isDropdownExpanded:false}">
+                <div class="relative shrink-0" x-data="{isDropdownExpanded:false}" @click.outside="isDropdownExpanded=false">
                     <div>
                         <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" id="user-menu-button" aria-expanded="false" aria-haspopup="true" x-on:click="isDropdownExpanded=!isDropdownExpanded">
                             <span class="sr-only">Open user menu</span>
@@ -99,7 +93,8 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="sm:hidden" id="mobile-menu">
 
-        <div class="space-y-1 px-2 pt-2 pb-3" :class="isMenuOpen?'block':'hidden'">
+        <div class="space-y-1 px-2 pt-2 pb-3 transition-all duration-300 ease-out origin-top" x-show="isMenuOpen" x-transition:enter="transform opacity-0 -translate-y-4" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transform opacity-100 translate-y-0" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" @click.outside="isMenuOpen = false">
+
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             @auth
 
