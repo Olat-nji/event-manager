@@ -24,21 +24,65 @@ jobs:
           coverage: none
           tools: composer:v2
 
-      - name: 📦 Install Dependencies
+      jobs:
+  run-tests:
+    name: ✅ Run Tests for Event Manager
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: ⚡ Set Up PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: zip, bcmath
+          coverage: none
+          tools: composer:v2
+
+      - name: 🗄️ Cache Composer Dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: composer-${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            composer-${{ runner.os }}-
+
+      - name: 📦 Install Composer Dependencies (if cache missed)
         run: |
           composer config http-basic.nova.laravel.com "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
           composer install --no-interaction --prefer-dist --optimize-autoloader
-          
+        if: steps.cache-composer.outputs.cache-hit != 'true'
+
+      - name: 🗄️ Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
+
       - name: 📦 Install Node.js & Dependencies
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          
-      - name: 📦 Install Node Modules
-        run: npm ci
 
-      - name: 🔨 Build Frontend Assets
+      - name: 📦 Install Node Modules (if cache missed)
+        run: npm ci
+        if: steps.cache-node.outputs.cache-hit != 'true'
+
+      - name: 🗄️ Cache Built Assets
+        uses: actions/cache@v3
+        with:
+          path: public/build
+          key: vite-assets-${{ runner.os }}-${{ hashFiles('resources/**/*') }}
+          restore-keys: |
+            vite-assets-${{ runner.os }}-
+
+      - name: 🔨 Build Frontend Assets (if cache missed)
         run: npm run build
+        if: steps.cache-vite.outputs.cache-hit != 'true'
 
       - name: 🛠️ Run Tests
         run: |
