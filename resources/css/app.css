@@ -99,36 +99,38 @@
     }
 
     .loader {
-        width: 10px;
-
+        width: 10px !important;
         aspect-ratio: 1;
         border-radius: 50%;
-
         animation: l5 1s infinite linear alternate;
     }
 
-    .fixed .loader {
+    .preloader  .loader {
         width: 15px;
+       
+
+        animation: l5 1s infinite linear alternate;
     }
+    
 
     @keyframes l5 {
         0% {
-            box-shadow: 20px 0 #fff, -20px 0 #fff2;
+            box-shadow: 20px 0 #fff, -20px 0 #fff;
             background: #fff
         }
 
         33% {
-            box-shadow: 20px 0 #fff, -20px 0 #fff2;
+            box-shadow: 20px 0 #fff, -20px 0 #fff;
             background: #fff2
         }
 
         66% {
-            box-shadow: 20px 0 #fff2, -20px 0 #fff;
+            box-shadow: 20px 0 #fff, -20px 0 #fff;
             background: #fff2
         }
 
         100% {
-            box-shadow: 20px 0 #fff2, -20px 0 #fff;
+            box-shadow: 20px 0 #fff, -20px 0 #fff;
             background: #fff
         }
     }
@@ -203,29 +205,36 @@
         background-color: var(--color-gray-100);
     }
 
-    .loader {
+   
+
+    .preloader  .loader {
         animation: l6 1s infinite linear alternate;
+        background: var(--color-gray-900);
+    }
+
+    button .loader {
+        animation: l5 1s infinite linear alternate;
         background: var(--color-gray-900);
     }
 
     @keyframes l6 {
         0% {
-            box-shadow: 20px 0 var(--color-gray-900), -20px 0 var(--color-gray-500);
+            box-shadow: 20px 0 var(--color-gray-900), -20px 0 var(--color-gray-900);
             background: var(--color-gray-900);
         }
 
         33% {
-            box-shadow: 20px 0 var(--color-gray-900), -20px 0 var(--color-gray-500);
+            box-shadow: 20px 0 var(--color-gray-900), -20px 0 var(--color-gray-900);
             background: var(--color-gray-500);
         }
 
         66% {
-            box-shadow: 20px 0 var(--color-gray-500), -20px 0 var(--color-gray-900);
+            box-shadow: 20px 0 var(--color-gray-900), -20px 0 var(--color-gray-900);
             background: var(--color-gray-500);
         }
 
         100% {
-            box-shadow: 20px 0 var(--color-gray-500), -20px 0 var(--color-gray-900);
+            box-shadow: 20px 0 var(--color-gray-900), -20px 0 var(--color-gray-900);
             background: var(--color-gray-900);
         }
     }

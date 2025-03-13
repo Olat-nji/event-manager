@@ -7,16 +7,16 @@ export function renderEventContent(info) {
 
     // Determine status icons based on user participation
     if (eventData.is_joined) {
-        statusIcon = `<span class="inline-flex items-center bg-green-300 text-xs font-semibold px-1.5 py-1.5 rounded-full"></span>`;
+        statusIcon = `<span class="inline-flex items-center bg-green-600 dark:bg-green-300 text-xs font-semibold px-1.5 py-1.5 rounded-full"></span>`;
     } else if (eventData.is_waitlisted) {
-        statusIcon = `<span class="inline-flex items-center bg-orange-300 text-xs font-semibold px-1.5 py-1.5 rounded-full"></span>`;
+        statusIcon = `<span class="inline-flex items-center bg-orange-600 dark:bg-orange-300 text-xs font-semibold px-1.5 py-1.5 rounded-full"></span>`;
     }
 
     // Determine event background color based on availability
     if (eventData.participants_count < eventData.capacity) {
-        classes = "bg-green-400 dark:bg-green-700"; // Available
+        classes = "bg-green-300 dark:bg-green-700"; // Available
     } else if (eventData.waitlist_count < eventData.waitlist_capacity) {
-        classes = "bg-yellow-400 dark:bg-yellow-600"; // Waitlist open
+        classes = "bg-yellow-300 dark:bg-yellow-600"; // Waitlist open
     } else {
         classes = "bg-gray-500 dark:bg-gray-600"; // Fully booked
     }

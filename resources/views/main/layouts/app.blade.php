@@ -13,7 +13,10 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-    <link rel="icon" type="image/svg+xml" href="{{ Vite::asset('resources/images/logo-white.svg') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ Vite::asset('resources/images/logo-white.svg') }}" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/svg+xml" href="{{ Vite::asset('resources/images/logo-black.svg') }}" media="(prefers-color-scheme: light)">
+    
+ 
 
 
 
@@ -28,7 +31,7 @@
 
 </head>
 <body class="text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-900" x-data="{}">
-    <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 300)" x-show="loading" class="fixed inset-0 bg-gray-100 dark:bg-gray-900 flex items-center justify-center z-50"
+    <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 300)" x-show="loading" class="preloader fixed inset-0 bg-gray-100 dark:bg-gray-900 flex items-center justify-center z-50"
       x-transition:leave="transition ease-in duration-300"
          x-transition:leave-start="opacity-100 "
          x-transition:leave-end="opacity-0 "

@@ -30,7 +30,7 @@
 
                 <div class="flex flex-wrap gap-4">
                     <div class="flex items-center space-x-2">
-                        <span class="w-4 h-4 bg-green-500 dark:bg-green-700 rounded-full"></span>
+                        <span class="w-4 h-4 bg-green-300 dark:bg-green-700 rounded-full"></span>
                         <span class="text-gray-800 dark:text-gray-300 text-sm">Available</span>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -42,11 +42,11 @@
                         <span class="text-gray-800 dark:text-gray-300 text-sm">Fully Booked</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <span class="w-4 h-4 bg-green-300 rounded-full"></span>
+                        <span class="w-4 h-4 bg-green-600 dark:bg-green-300 rounded-full"></span>
                         <span class="text-gray-800 dark:text-gray-300 text-sm">Joined</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <span class="w-4 h-4 bg-orange-300 rounded-full"></span>
+                        <span class="w-4 h-4 bg-orange-600 dark:bg-orange-300 rounded-full"></span>
                         <span class="text-gray-800 dark:text-gray-300 text-sm">Waitlisted</span>
                     </div>
                 </div>
