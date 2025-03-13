@@ -3,6 +3,7 @@
 namespace App\Nova\Actions\Event;
 
 use App\Enums\EventStatus;
+use App\Features\Event\EventService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -27,7 +28,7 @@ class PublishEvent extends Action
         $models->toQuery()->update([
             'status' => EventStatus::LIVE
         ]);
-
+        EventService::invalidateCache();
         return Action::message('Selected event(s) have been published.');
     }
 

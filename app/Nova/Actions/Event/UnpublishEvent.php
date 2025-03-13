@@ -2,6 +2,7 @@
 
 namespace App\Nova\Actions\Event;
 
+use App\Features\Event\EventService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ class UnpublishEvent extends Action
         $models->toQuery()->update([
             'status' => 'draft'
         ]);
+        EventService::invalidateCache();
 
         return Action::message('Selected event(s) have been published.');
     }
