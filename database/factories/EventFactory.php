@@ -23,11 +23,11 @@ class EventFactory extends Factory
         return [
             'name' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph,
-            'event_date_time' => $this->faker->dateTimeBetween('+1 week', '+1 month'),
+            'event_date_time' => $this->faker->dateTimeBetween('-2 months', '+2 months'),
             'duration' => $this->faker->numberBetween(1, 5), // Duration in hours
             'location' => $this->faker->city,
-            'capacity' => $this->faker->numberBetween(10, 100),
-            'waitlist_capacity' => $this->faker->numberBetween(5, 20),
+            'capacity' => $this->faker->numberBetween(1, 3),
+            'waitlist_capacity' => $this->faker->numberBetween(1, 3),
             'status' => EventStatus::LIVE, // Assuming you have an enum
         ];
     }

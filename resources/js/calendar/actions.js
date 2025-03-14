@@ -57,7 +57,7 @@ export function eventAction(type, eventId) {
                 // Adjust event properties based on user action
                 if (type === "join") {
                     const willBeWaitlisted =
-                        data.data.participants_count + 1 >= data.data.capacity;
+                        data.data.participants_count >= data.data.capacity;
 
                     data.data.is_joined = !willBeWaitlisted;
                     data.data.is_waitlisted = willBeWaitlisted;
