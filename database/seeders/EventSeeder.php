@@ -15,7 +15,6 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
-        Event::query()->forceDelete();
 
       
         if (Event::count() < 30) {
